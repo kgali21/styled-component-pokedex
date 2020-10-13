@@ -18,6 +18,8 @@ const PokeCardWrapper = styled.div`
   align-items: center;
   height: auto;
   width: 50vw;
+  background-color: lightblue;
+  width: 100%;
 `;
 
 const PokeCard = ({ image, name, attack, hp, speed, url}) => (

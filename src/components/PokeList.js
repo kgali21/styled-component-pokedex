@@ -14,6 +14,7 @@ const PokeLi = styled.li`
   margin: 2em 2em 2em 2em;
   list-style: none;
   width: 25%;
+  border: blue solid 1px;
 `;
 
 const PokeList = () => {
