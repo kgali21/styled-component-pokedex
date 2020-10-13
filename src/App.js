@@ -1,16 +1,13 @@
 import React from 'react';
 import PokeList from './components/PokeList.js';
-// import styled from 'styled-components';
-
-// const PokeBackground = styled.body`
-//   background-color: red;
-//   height: 100%;
-//   width: 100%;
-// `;
+// import SearchForm from './components/SearchForm.js';
 
 function App() {
   return (
+    <>
+      {/* <SearchForm /> */}
       <PokeList />
+    </>
   );
 }
 

@@ -20,11 +20,11 @@ const PokeCardWrapper = styled.div`
   width: 50vw;
   background-color: lightblue;
   width: 100%;
+  height: 100%;
 `;
 
 const PokeCard = ({ image, name, attack, hp, speed, url}) => (
   <PokeCardWrapper>
-    {/* <img src={image} alt={name} /> */}
     <PokeImg src={image} alt={name} />
     <PokeTitle>{name}</PokeTitle>
     <p>Attack: {attack}</p>
