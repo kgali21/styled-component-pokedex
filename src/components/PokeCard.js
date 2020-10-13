@@ -8,7 +8,7 @@ const PokeCard = ({ image, name, attack, hp, speed, url}) => (
     <p>{attack}</p>
     <p>{hp}</p>
     <p>{speed}</p>
-    <p>{url}</p>
+    <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
   </>
 );
 

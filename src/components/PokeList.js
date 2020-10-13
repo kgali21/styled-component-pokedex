@@ -5,7 +5,7 @@ import PokeCard from './PokeCard.js';
 const PokeList = () => {
 
   const pokeElements = fakeData.map(data => (
-        <li>
+        <li key={data._id}>
             <PokeCard
               image={data.url_image}
               name={data.pokemon}
