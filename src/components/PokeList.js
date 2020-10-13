@@ -7,6 +7,7 @@ const PokeList = () => {
   const pokeElements = fakeData.map(data => (
         <li>
             <PokeCard
+              image={data.url_image}
               name={data.pokemon}
               attack={data.attack}
               hp={data.hp}

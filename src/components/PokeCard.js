@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PokeCard = ({ name, attack, hp, speed, url}) => (
+const PokeCard = ({ image, name, attack, hp, speed, url}) => (
   <>
+    <img src={image} alt={name} />
     <h1>{name}</h1>
     <p>{attack}</p>
     <p>{hp}</p>
@@ -12,6 +13,7 @@ const PokeCard = ({ name, attack, hp, speed, url}) => (
 );
 
 PokeCard.propTypes = {
+  image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   attack: PropTypes.number.isRequired,
   hp: PropTypes.number.isRequired,
