@@ -18,3 +18,5 @@ PokeCard.propTypes = {
   speed: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
 }
+
+export default PokeCard;
