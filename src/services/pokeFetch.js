@@ -1,4 +1,4 @@
-export const mainFetch = () => {
-  return fetch(`${process.env.POKEMON_API_BASE_URL}`)
+export const mainPokeFetch = () => {
+  return fetch(`https://alchemy-pokedex.herokuapp.com/api/pokedex`)
     .then(res => res.json());
 };

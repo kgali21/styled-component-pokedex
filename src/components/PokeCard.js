@@ -1,15 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const PokeTitle = styled.h1`
+  color: blue;
+`;
+
+const PokeImg = styled.img`
+  height: 25vh;
+  width: 15vw;
+`;
+
+const PokeCardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 50vw;
+`;
 
 const PokeCard = ({ image, name, attack, hp, speed, url}) => (
-  <>
-    <img src={image} alt={name} />
-    <h1>{name}</h1>
-    <p>{attack}</p>
-    <p>{hp}</p>
-    <p>{speed}</p>
+  <PokeCardWrapper>
+    {/* <img src={image} alt={name} /> */}
+    <PokeImg src={image} alt={name} />
+    <PokeTitle>{name}</PokeTitle>
+    <p>Attack: {attack}</p>
+    <p>Hp: {hp}</p>
+    <p>Speed: {speed}</p>
     <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
-  </>
+  </PokeCardWrapper>
 );
 
 PokeCard.propTypes = {
