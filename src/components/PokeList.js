@@ -25,34 +25,55 @@ const PokeList = () => {
   const [search, setSearch] = useState('');
   const [perPage, setPerPage] = useState(9);
   const [page, setPage] = useState(1);
+  const [count, setCount] = useState(35) 
 
 
   useEffect(() => {
-    mainPokeFetch(perPage, page)
-      .then(res => {
-        setPokemon(res.results);
-        setPage(res.page)
-      })
-  }, [perPage, page]);
+    if(search === ''){
+      mainPokeFetch(perPage, page)
+        .then(res => {
+          setPokemon(res.results);
+          setCount(res.count);
+          setPage(res.page);
+        })
+    } else {
+      onePokeFetch(search, page, perPage)
+        .then(res => {
+          setCount(res.count)
+          setSearch(res.search.pokemon);
+          setPerPage(perPage);
+          setPage(res.page)
+          setPokemon(res.results)
+        });
+    }
+  }, [page, perPage]);
+
+  useEffect(() => {
+    if(search) return pokemon;
+  },[])
 
   const handleChange = (event) => {
     setSearch(event.target.value);
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     onePokeFetch(search, page, perPage)
-        .then(res => {
-          setSearch(res.search.pokemon);
-          setPerPage(perPage);
-          setPage(res.page)
-          setPokemon(res.results)
-        });
+      .then(res => {
+        setCount(res.count)
+        setSearch(res.search.pokemon);
+        setPerPage(perPage);
+        setPage(res.page)
+        setPokemon(res.results)
+      });
+      console.log(count, 'count')
   }
 
   const handleNext = () => {
-    console.log(search, 'sreach')
-    setPage(Number(page) + 1);
+    setPage(+page + 1);
+};
+  const handleBack = () => {
+    setPage(+page - 1);
 };
   
   const pokeElements = pokemon.map(data => (
@@ -77,8 +98,8 @@ const PokeList = () => {
       <PokeUl>
           {pokeElements}
       </PokeUl>
-      <button>Back</button>
-      <button onClick={handleNext}>Next</button>
+      <button onClick={handleBack} disabled={page <= 1 ? true : ''}>Back</button>
+      <button onClick={handleNext} disabled={page === pokemon.length}>Next</button>
       </>
     );
   }
