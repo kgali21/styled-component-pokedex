@@ -1,4 +1,4 @@
-export const mainPokeFetch = (search, perPage, page) => {
+export const mainPokeFetch = (perPage, page) => {
   return fetch(`https://alchemy-pokedex.herokuapp.com/api/pokedex?page=${page}&perPage=${perPage}`)
     .then(res => res.json());
 };

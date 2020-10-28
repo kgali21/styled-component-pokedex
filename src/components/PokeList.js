@@ -43,12 +43,15 @@ const PokeList = () => {
     e.preventDefault(); 
     onePokeFetch(search, page, perPage)
         .then(res => {
-          setSearch(res.search);
+          setSearch(res.search.pokemon);
+          setPerPage(perPage);
+          setPage(res.page)
           setPokemon(res.results)
         });
   }
 
   const handleNext = () => {
+    console.log(search, 'sreach')
     setPage(Number(page) + 1);
 };
   
