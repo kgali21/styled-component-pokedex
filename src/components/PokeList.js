@@ -23,25 +23,34 @@ const PokeLi = styled.li`
 const PokeList = () => {
   const [pokemon, setPokemon] = useState([]);
   const [search, setSearch] = useState('');
+  const [perPage, setPerPage] = useState(9);
+  const [page, setPage] = useState(1);
 
 
   useEffect(() => {
-    mainPokeFetch()
+    mainPokeFetch(perPage, page)
       .then(res => {
-        setPokemon(res.results)
+        setPokemon(res.results);
+        setPage(res.page)
       })
-  }, []);
-  
+  }, [perPage, page]);
+
   const handleChange = (event) => {
     setSearch(event.target.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    onePokeFetch(search)
-        .then(res => setPokemon(res.results));
-    console.log(pokemon, 'pokemon')  
+    onePokeFetch(search, page, perPage)
+        .then(res => {
+          setSearch(res.search);
+          setPokemon(res.results)
+        });
   }
+
+  const handleNext = () => {
+    setPage(Number(page) + 1);
+};
   
   const pokeElements = pokemon.map(data => (
         <PokeLi key={data._id}>
@@ -65,6 +74,8 @@ const PokeList = () => {
       <PokeUl>
           {pokeElements}
       </PokeUl>
+      <button>Back</button>
+      <button onClick={handleNext}>Next</button>
       </>
     );
   }
