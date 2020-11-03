@@ -26,7 +26,7 @@ const PokeList = () => {
   const [perPage, setPerPage] = useState(9);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(9) 
-
+  const lastPage = Math.ceil(count / perPage);
 
   useEffect(() => {
     if(search === ''){
@@ -46,8 +46,9 @@ const PokeList = () => {
           setPokemon(res.results)
         });
     }
+    // eslint-disable-next-line
   }, [page, perPage]);
-
+  
   const handleChange = (event) => {
     setSearch(event.target.value);
   }
@@ -84,10 +85,6 @@ const PokeList = () => {
             />
         </PokeLi>
   ))
-
-    const lastPage = Math.ceil(count / perPage);
-    console.log(page, 'page')
-    console.log(lastPage, 'lastPage')
 
     return (
       <>
