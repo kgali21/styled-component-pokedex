@@ -56,7 +56,7 @@ const PokeList = () => {
         });
     }
     // eslint-disable-next-line
-  }, [page, perPage]);
+  }, [page]);
   
   const handleChange = (event) => {
     setSearch(event.target.value);
