@@ -44,7 +44,7 @@ const PokeList = () => {
             setPage(page);
           })
         setLoading(false)  
-      }, 3000)
+      }, 1000)
     } else {
       onePokeFetch(search, page, perPage)
         .then(res => {
@@ -85,6 +85,8 @@ const PokeList = () => {
   const handleBack = () => {
     setPage(+page - 1);
   };
+
+  console.log(page, 'next error')
   
   const pokeElements = pokemon.map(data => (
         <PokeLi key={data._id}>
@@ -105,13 +107,13 @@ const PokeList = () => {
         <input type="text" onChange={handleChange} />
         <button>Search</button>
       </form>
+      <button onClick={handleBack.bind(null, pokemon)} disabled={page <= 1 || loading === true ? true : ''}>Back</button>
+      <button onClick={handleNext.bind(null, pokemon)} disabled={page >= lastPage || loading === true ? true : ''}>Next</button>
       { loading === false ? 
       <PokeUl>
           {pokeElements}
       </PokeUl> : <p>Loading...</p>
       }
-      <button onClick={handleBack} disabled={page <= 1 ? true : ''}>Back</button>
-      <button onClick={handleNext.bind(null, pokemon)} disabled={page >= lastPage ? true : ''}>Next</button>
       </>
       
     );
