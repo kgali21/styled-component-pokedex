@@ -30,17 +30,21 @@ const PokeList = () => {
   const [search, setSearch] = useState('');
   const [perPage, setPerPage] = useState(9);
   const [page, setPage] = useState(1);
-  const [count, setCount] = useState(9) 
+  const [count, setCount] = useState(9);
+  const [loading, setLoading] = useState(true); 
   const lastPage = Math.ceil(count / perPage);
 
   useEffect(() => {
     if(search === ''){
-      mainPokeFetch(perPage, page)
-        .then(res => {
-          setPokemon(res.results);
-          setCount(res.count);
-          setPage(page);
-        })
+      setTimeout(() => {
+        mainPokeFetch(perPage, page)
+          .then(res => {
+            setPokemon(res.results);
+            setCount(res.count);
+            setPage(page);
+          })
+        setLoading(false)  
+      }, 3000)
     } else {
       onePokeFetch(search, page, perPage)
         .then(res => {
@@ -60,14 +64,18 @@ const PokeList = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onePokeFetch(search, page, perPage)
-      .then(res => {
-        setCount(res.count)
-        setSearch(res.search.pokemon);
-        setPerPage(perPage);
-        setPage(res.page)
-        setPokemon(res.results)
-      });
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      onePokeFetch(search, page, perPage)
+        .then(res => {
+          setCount(res.count)
+          setSearch(res.search.pokemon);
+          setPerPage(perPage);
+          setPage(page)
+          setPokemon(res.results)
+        });
+    }, 3000);
   }
 
   const handleNext = () => {
@@ -97,12 +105,15 @@ const PokeList = () => {
         <input type="text" onChange={handleChange} />
         <button>Search</button>
       </form>
+      { loading === false ? 
       <PokeUl>
           {pokeElements}
-      </PokeUl>
+      </PokeUl> : <p>Loading...</p>
+      }
       <button onClick={handleBack} disabled={page <= 1 ? true : ''}>Back</button>
-      <button onClick={handleNext} disabled={page >= lastPage ? true : ''}>Next</button>
+      <button onClick={handleNext.bind(null, pokemon)} disabled={page >= lastPage ? true : ''}>Next</button>
       </>
+      
     );
   }
 
