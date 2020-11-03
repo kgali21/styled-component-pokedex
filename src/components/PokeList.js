@@ -17,6 +17,11 @@ const PokeLi = styled.li`
   width: 25%;
   height: auto;
   border: blue solid 1px;
+  padding: 2em;
+
+  &:hover {
+    color:red;
+  }
 `;
 
 // React Component
