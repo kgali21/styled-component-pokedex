@@ -34,7 +34,7 @@ const PokeList = () => {
         .then(res => {
           setPokemon(res.results);
           setCount(res.count);
-          setPage(res.page);
+          setPage(page);
         })
     } else {
       onePokeFetch(search, page, perPage)
@@ -42,7 +42,7 @@ const PokeList = () => {
           setCount(res.count)
           setSearch(res.search.pokemon);
           setPerPage(perPage);
-          setPage(res.page)
+          setPage(page)
           setPokemon(res.results)
         });
     }
