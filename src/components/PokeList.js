@@ -25,7 +25,7 @@ const PokeList = () => {
   const [search, setSearch] = useState('');
   const [perPage, setPerPage] = useState(9);
   const [page, setPage] = useState(1);
-  const [count, setCount] = useState(35) 
+  const [count, setCount] = useState(9) 
 
 
   useEffect(() => {
@@ -48,10 +48,6 @@ const PokeList = () => {
     }
   }, [page, perPage]);
 
-  useEffect(() => {
-    if(search) return pokemon;
-  },[])
-
   const handleChange = (event) => {
     setSearch(event.target.value);
   }
@@ -66,15 +62,15 @@ const PokeList = () => {
         setPage(res.page)
         setPokemon(res.results)
       });
-      console.log(count, 'count')
   }
 
   const handleNext = () => {
     setPage(+page + 1);
-};
+  };
+
   const handleBack = () => {
     setPage(+page - 1);
-};
+  };
   
   const pokeElements = pokemon.map(data => (
         <PokeLi key={data._id}>
@@ -89,6 +85,10 @@ const PokeList = () => {
         </PokeLi>
   ))
 
+    const lastPage = Math.ceil(count / perPage);
+    console.log(page, 'page')
+    console.log(lastPage, 'lastPage')
+
     return (
       <>
       <form onSubmit={handleSubmit}>
@@ -99,7 +99,7 @@ const PokeList = () => {
           {pokeElements}
       </PokeUl>
       <button onClick={handleBack} disabled={page <= 1 ? true : ''}>Back</button>
-      <button onClick={handleNext} disabled={page === pokemon.length}>Next</button>
+      <button onClick={handleNext} disabled={page >= lastPage ? true : ''}>Next</button>
       </>
     );
   }
