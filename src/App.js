@@ -1,10 +1,13 @@
 import React from 'react';
-import './App.css';
 import PokeList from './components/PokeList.js';
+// import SearchForm from './components/SearchForm.js';
 
 function App() {
   return (
-    <PokeList />
+    <>
+      {/* <SearchForm /> */}
+      <PokeList />
+    </>
   );
 }
 
